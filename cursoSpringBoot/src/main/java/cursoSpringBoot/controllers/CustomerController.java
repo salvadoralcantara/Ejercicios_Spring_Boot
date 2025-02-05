@@ -1,9 +1,7 @@
 package cursoSpringBoot.controllers;
 
 import cursoSpringBoot.domain.Customer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,12 +15,12 @@ public class CustomerController {
             new Customer(003, "Pedro", "Gomez", "pedrog", "91011")
     ));
 
-    @GetMapping("customers")
+    @GetMapping("/customers")
     public List<Customer> getCustomers() {
         return customers;
     }
 
-    @GetMapping("customer/{userName}")
+    @GetMapping("/customer/{userName}")
     public Customer getCustomer(@PathVariable String userName){
         for (Customer elementCustomer: customers) {
             if (elementCustomer.getUserName().equalsIgnoreCase(userName)) {
@@ -33,5 +31,12 @@ public class CustomerController {
         }
         return null;
     }
+
+    @PostMapping("/customers")
+    public Customer postCustomer(@RequestBody Customer customer){
+        customers.add(customer);
+        return customer;
+    }
+
 }
 
