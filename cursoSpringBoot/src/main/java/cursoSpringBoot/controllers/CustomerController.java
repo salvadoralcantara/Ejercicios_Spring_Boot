@@ -23,10 +23,8 @@ public class CustomerController {
     @GetMapping("/customer/{userName}")
     public Customer getCustomer(@PathVariable String userName){
         for (Customer elementCustomer: customers) {
-            if (elementCustomer.getUserName().equalsIgnoreCase(userName)) {
-                {
+            if (elementCustomer.getUserName().equalsIgnoreCase(userName)) { // example: "juanp".equalsIgnoreCase("juanp") o if true si juanp es igual a juanp
                     return elementCustomer;
-                }
             }
         }
         return null;
@@ -36,6 +34,21 @@ public class CustomerController {
     public Customer postCustomer(@RequestBody Customer customer){
         customers.add(customer);
         return customer;
+    }
+
+    @PutMapping("/customers")
+    public Customer putCustomer(@RequestBody Customer customer){
+        for (Customer elementCustomer: customers){ // this is a for each, recorre todos los elementos de la lista customers
+            if (elementCustomer.getID() == customer.getID()){
+                elementCustomer.setName(customer.getName());
+                elementCustomer.setLastName(customer.getLastName());
+                elementCustomer.setUserName(customer.getUserName());
+                elementCustomer.setPassword(customer.getPassword());
+
+                return elementCustomer;
+            }
+        }
+        return null;
     }
 
 }
