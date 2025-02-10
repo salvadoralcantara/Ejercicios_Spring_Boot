@@ -51,5 +51,16 @@ public class CustomerController {
         return null;
     }
 
+    @DeleteMapping("/customers/{id}")
+    public Customer deleteCustomer(@PathVariable int id){
+        for (Customer elementCustomer: customers){ // this is a for each, recorre todos los elementos de la lista customers
+            if (elementCustomer.getID() == id){
+                customers.remove(elementCustomer);
+                return elementCustomer;
+            }
+        }
+        return null;
+    }
+
 }
 
