@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
+@RequestMapping("/customers")
 public class CustomerController {
     private List<Customer> customers = new ArrayList<>(Arrays.asList(
             new Customer(001, "Juan", "Perez", "juanp", "1234"),
@@ -15,12 +16,14 @@ public class CustomerController {
             new Customer(003, "Pedro", "Gomez", "pedrog", "91011")
     ));
 
-    @GetMapping("/customers")
+    //@RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public List<Customer> getCustomers() {
         return customers;
     }
 
-    @GetMapping("/customer/{userName}")
+    //@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    @GetMapping("/{userName}")
     public Customer getCustomer(@PathVariable String userName){
         for (Customer elementCustomer: customers) {
             if (elementCustomer.getUserName().equalsIgnoreCase(userName)) { // example: "juanp".equalsIgnoreCase("juanp") o if true si juanp es igual a juanp
@@ -30,13 +33,14 @@ public class CustomerController {
         return null;
     }
 
-    @PostMapping("/customers")
+    //@RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public Customer postCustomer(@RequestBody Customer customer){
         customers.add(customer);
         return customer;
     }
 
-    @PutMapping("/customers")
+    @PutMapping
     public Customer putCustomer(@RequestBody Customer customer){
         for (Customer elementCustomer: customers){ // this is a for each, recorre todos los elementos de la lista customers
             if (elementCustomer.getID() == customer.getID()){
@@ -51,7 +55,7 @@ public class CustomerController {
         return null;
     }
 
-    @DeleteMapping("/customers/{id}")
+    @DeleteMapping("/{id}")
     public Customer deleteCustomer(@PathVariable int id){
         for (Customer elementCustomer: customers){ // this is a for each, recorre todos los elementos de la lista customers
             if (elementCustomer.getID() == id){
@@ -62,7 +66,7 @@ public class CustomerController {
         return null;
     }
 
-    @PatchMapping("/customers")
+    @PatchMapping
     public Customer patchCustomer(@RequestBody Customer customer){
         for(Customer elementCustomer: customers){
             if (elementCustomer.getID() == customer.getID()){
@@ -78,7 +82,6 @@ public class CustomerController {
                 }
                 if(elementCustomer.getPassword() != null){
                     elementCustomer.setPassword(customer.getPassword());
-
                 }
                 return elementCustomer;
             }
