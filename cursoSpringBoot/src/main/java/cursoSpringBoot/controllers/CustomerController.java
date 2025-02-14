@@ -62,5 +62,29 @@ public class CustomerController {
         return null;
     }
 
+    @PatchMapping("/customers")
+    public Customer patchCustomer(@RequestBody Customer customer){
+        for(Customer elementCustomer: customers){
+            if (elementCustomer.getID() == customer.getID()){
+
+                if(elementCustomer.getName() != null){
+                    elementCustomer.setName(customer.getName());
+                }
+                if (elementCustomer.getLastName() != null){
+                    elementCustomer.setLastName(customer.getLastName());
+                }
+                if (elementCustomer.getUserName() != null){
+                    elementCustomer.setUserName(customer.getUserName());
+                }
+                if(elementCustomer.getPassword() != null){
+                    elementCustomer.setPassword(customer.getPassword());
+
+                }
+                return elementCustomer;
+            }
+        }
+        return null;
+    }
+
 }
 
