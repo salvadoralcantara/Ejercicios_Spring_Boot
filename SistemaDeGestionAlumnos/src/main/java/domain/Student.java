@@ -1,4 +1,4 @@
-package domian;
+package domain;
 
 public class Student {
     private int id;
@@ -6,9 +6,6 @@ public class Student {
     private String gmail;
     private int age;
     private String course;
-
-    public Student() {
-    }
 
     public Student(int id, String name, String gmail, int age, String course){
         this.id = id;
@@ -18,6 +15,9 @@ public class Student {
         this.course = course;
     }
 
+    public int getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }
