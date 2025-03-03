@@ -21,12 +21,13 @@ public class StudentController {
     @GetMapping
     public List<Student> getStudents() {
         return students;
-    }
+     }
 
-    @GetMapping("/{id}")
-    public Student getStudent(@PathVariable int id) {
+     //Busqueda de estudiantes por gmail
+    @GetMapping("/{gmail}")
+    public Student getStudent(@PathVariable String gmail) {
         for (Student elementStudent : students) {
-            if (elementStudent.getId() == id) {
+            if (elementStudent.getGmail().equals(gmail)) {
                 return elementStudent;
             }
         }
